@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class MyColors {
+class AppColors {
   static const Color primaryColor = Color(0xff4568dc);
   static const List<Color> primaryGradientColor = [
     Color(0xff4568dc),

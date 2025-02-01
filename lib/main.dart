@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive_todo/views/home/home_view.dart';
 
 Future<void> main() async {
   runApp(const MyApp());
@@ -47,23 +48,7 @@ class MyApp extends StatelessWidget {
               fontWeight: FontWeight.w500,
             )),
       ),
-      home: const TestPage(),
-    );
-  }
-}
-
-class TestPage extends StatefulWidget {
-  const TestPage({super.key});
-
-  @override
-  State<TestPage> createState() => _TestPageState();
-}
-
-class _TestPageState extends State<TestPage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
+      home: const HomeView(),
     );
   }
 }
