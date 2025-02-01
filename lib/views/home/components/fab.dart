@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_todo/utils/app_colors.dart';
 
@@ -10,7 +11,9 @@ class Fab extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print("Tasks Tapped");
+        if (kDebugMode) {
+          print("Tasks Tapped");
+        }
       },
       child: Material(
         borderRadius: BorderRadius.circular(15),

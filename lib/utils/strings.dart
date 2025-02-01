@@ -1,4 +1,4 @@
-class MyString {
+class AppStr {
   static const String mainTitle = "My Tasks";
   static const String deletedTask = "This task was deleted";
   static const String doneAllTask = "You Have Done All Tasks!👌";
