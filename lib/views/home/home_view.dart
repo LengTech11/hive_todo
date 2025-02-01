@@ -7,6 +7,8 @@ import 'package:hive_todo/views/home/components/fab.dart';
 import 'package:hive_todo/views/home/widget/task_widget.dart';
 import 'package:lottie/lottie.dart';
 
+import 'package:animate_do/animate_do.dart';
+
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
@@ -15,7 +17,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  final List<int> testing = [1, 2];
+  final List<int> testing = [2, 323, 23];
 
   @override
   Widget build(BuildContext context) {
@@ -124,8 +126,24 @@ class _HomeViewState extends State<HomeView> {
                       },
                     )
                   : Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Lottie.asset(lottieURL),
+                        FadeIn(
+                          child: SizedBox(
+                            width: 200,
+                            height: 200,
+                            child: Lottie.asset(
+                              lottieURL,
+                              animate: testing.isNotEmpty ? false : true,
+                            ),
+                          ),
+                        ),
+                        FadeInUp(
+                          from: 30,
+                          child: const Text(
+                            AppStr.doneAllTask,
+                          ),
+                        ),
                       ],
                     ),
             ),
