@@ -6,7 +6,6 @@ import 'package:hive_todo/utils/strings.dart';
 import 'package:hive_todo/views/home/components/fab.dart';
 import 'package:hive_todo/views/home/widget/task_widget.dart';
 import 'package:lottie/lottie.dart';
-
 import 'package:animate_do/animate_do.dart';
 
 class HomeView extends StatefulWidget {
@@ -17,7 +16,20 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  final List<int> testing = [2, 323, 23];
+  final List<int> testing = [];
+
+  void addTask() {
+    setState(() {
+      testing.add(DateTime.now()
+          .millisecondsSinceEpoch); // Adds a unique number as a task
+    });
+  }
+
+  void removeTask(int index) {
+    setState(() {
+      testing.removeAt(index);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +38,10 @@ class _HomeViewState extends State<HomeView> {
     return Scaffold(
       backgroundColor: Colors.white,
 
-      /// FAB
-      floatingActionButton: const Fab(),
+      /// Floating Action Button
+      floatingActionButton: Fab(onTap: addTask),
 
-      /// body
+      /// Body
       body: SizedBox(
         width: double.infinity,
         height: double.infinity,
@@ -56,7 +68,6 @@ class _HomeViewState extends State<HomeView> {
                     ),
                   ),
 
-                  /// spaceflutter clean
                   25.w,
 
                   /// Top Level Task info
@@ -70,7 +81,7 @@ class _HomeViewState extends State<HomeView> {
                       ),
                       3.h,
                       Text(
-                        "1 of 3 tasks",
+                        "${testing.length} of tasks",
                         style: textTheme.titleMedium,
                       ),
                     ],
@@ -88,38 +99,27 @@ class _HomeViewState extends State<HomeView> {
               ),
             ),
 
-            /// Tasks
-            SizedBox(
-              width: double.infinity,
-              height: 745,
+            /// Tasks or Empty State
+            Expanded(
               child: testing.isNotEmpty
                   ? ListView.builder(
                       itemCount: testing.length,
                       scrollDirection: Axis.vertical,
                       itemBuilder: (context, index) {
                         return Dismissible(
+                          key: Key(testing[index].toString()),
                           direction: DismissDirection.horizontal,
-                          onDismissed: (_) {
-                            /// we will remove current task from DB
-                          },
+                          onDismissed: (_) => removeTask(index),
                           background: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Icon(
-                                Icons.deblur_outlined,
-                                color: Colors.grey,
-                              ),
+                              const Icon(Icons.delete, color: Colors.grey),
                               8.w,
                               const Text(
                                 AppStr.deleteTask,
-                                style: TextStyle(
-                                  color: Colors.grey,
-                                ),
+                                style: TextStyle(color: Colors.grey),
                               )
                             ],
-                          ),
-                          key: Key(
-                            index.toString(),
                           ),
                           child: const TaskWidget(),
                         );
@@ -134,7 +134,7 @@ class _HomeViewState extends State<HomeView> {
                             height: 200,
                             child: Lottie.asset(
                               lottieURL,
-                              animate: testing.isNotEmpty ? false : true,
+                              animate: true,
                             ),
                           ),
                         ),
